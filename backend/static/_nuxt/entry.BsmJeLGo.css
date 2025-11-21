@@ -1,0 +1,1 @@
+form fieldset>div,form>div{display:flex;padding-top:30px}form fieldset>div>div,form>div>div{margin-right:10px}label{text-decoration:underline}div>button:last-child{margin-left:5px}.main{align-items:center;display:flex;justify-content:center}.container{display:inline-block}.buttons{align-items:center;display:flex;justify-content:center}
