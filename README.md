@@ -17,17 +17,30 @@ docker compose exec app npm run seed
 ## Запуск node (linux bash)
 
 cd ./frontend
+
+npm install
+
 npm run generate
-сp -r ./dist/* ../backend/static
+
+**если нужно разделить фронтенд и бакенд, то не надо это выполнять.**
+
+    сp -r ./dist/* ../backend/static     
 
 cd ../backend
+
+npm install
+
 mv excample.env .env
 
-- в .env _изменить параметры подключения к БД_
-  npm install
-  npm run build
-  npm run seed
-  npm run start
+_в .env изменить параметры подключения к БД_
+
+npm install
+
+npm run build
+
+npm run seed
+
+npm run start
 
 **URL**: [http://localhost:3000]
 
