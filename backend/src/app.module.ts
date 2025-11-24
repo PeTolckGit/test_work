@@ -29,8 +29,8 @@ import { join } from 'path';
       database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       extra: {
-        max: 20,
-        min: 5,
+        max: 2,
+        min: 1,
         idleTimeoutMillis: 30000,
         connectionTimeoutMillis: 5000,
         acquireTimeoutMillis: 60000,
