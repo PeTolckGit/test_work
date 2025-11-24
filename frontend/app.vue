@@ -45,7 +45,9 @@ const send = () => {
             errors.value++;
         });
     if (count.value < requestCount.value && status.value) {
-        offset.value += limit.value;
+        if (paginate.value){
+            offset.value += limit.value;
+        }
         timeout = setTimeout(send, delayMs.value);
     }
     else { 
@@ -107,7 +109,7 @@ const urlToApi = computed(() => {
                     </div>
                 </div>
                 <fieldset>
-                    <legend>Поэтапная загрузка' <input type="checkbox" v-model="paginate"></input></legend>
+                    <legend>Поэтапная загрузка<input type="checkbox" v-model="paginate"></input></legend>
                     <div>
                         <div>
                             <label title="С какой позиции начать выборку из БД">Смещение(offset)</label>

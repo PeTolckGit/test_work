@@ -6,27 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'test_work',
-      password: 'test_work_password_qwerty',
-      database: 'test_work',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-      extra: {
-        max: 10,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 2000,
-      },
-    }),
-    ItemsModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'static'),
       serveRoot: '/',
@@ -35,6 +20,27 @@ import { join } from 'path';
         fallthrough: false,
       },
     }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWD,
+      database: process.env.DB_NAME,
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      extra: {
+        max: 20,
+        min: 5,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 5000,
+        acquireTimeoutMillis: 60000,
+      },
+      logging: process.env.NODE_ENV === 'development',
+      cache: {
+        duration: 30000,
+      },
+    }),
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

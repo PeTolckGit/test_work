@@ -1,24 +1,19 @@
+import * as dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
-
-export default new DataSource({
+//dotenv.config();
+console.log('process.env.DB_HOST: ', process.env.DB_HOST);
+const AppDataSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'test_work',
-  password: 'test_work_password_qwerty',
-  database: 'test_work',
-  entities: ['src/**/*.entity{.ts,.js}'],
-  migrations: ['src/migrations/**/*{.ts,js}'],
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT) || 5432,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWD,
+  database: process.env.DB_NAME,
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
+  migrations: [__dirname + '/migrations/**/*{.js,.ts}'],
   synchronize: false,
   migrationsTableName: 'migrations',
   dropSchema: false,
 });
 
-// ormconfig
-//   .initialize()
-//   .then(() => {
-//     console.log('Data Source has been initialized!');
-//   })
-//   .catch((err) => {
-//     console.error('Error during Data Source initialization', err);
-//   });
+export default AppDataSource;

@@ -2,9 +2,6 @@ import { Controller, Get, Query, Param, ParseIntPipe } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import type { findData } from './types';
 
-const defaultOffset: number = 0;
-const defaultLimit: number = 10;
-
 @Controller('items')
 export class ItemsController {
   constructor(private readonly ItemsService: ItemsService) {}
@@ -20,15 +17,14 @@ export class ItemsController {
     if (limit !== undefined) {
       Object.assign(reqParams, { take: limit });
     }
-
-    console.log(
-      'getAllItems reqParams: ',
-      reqParams,
-      '; offset: ',
-      offset,
-      '; limit: ',
-      limit,
-    );
+    // console.log(
+    //   'getAllItems reqParams: ',
+    //   reqParams,
+    //   '; offset: ',
+    //   offset,
+    //   '; limit: ',
+    //   limit,
+    // );
     return this.ItemsService.find(reqParams);
   }
 

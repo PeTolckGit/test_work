@@ -18,11 +18,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -d ./src/ormconfig.ts",
-    "mig:create": "npm run typeorm migration:create",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --dataSource=./src/ormconfig.ts",
+    "mig:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create",
     "mig:generate": "npm run typeorm migration:generate",
     "mig:migrate": "npm run typeorm migration:run",
-    "mig:seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --dataSource=./src/seedconfig.ts migration:run"
+    "seed": "ts-node -r tsconfig-paths/register src/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -33,6 +33,7 @@
     "@nestjs/typeorm": "^11.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
+    "dotenv": "^17.2.3",
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
